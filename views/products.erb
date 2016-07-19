@@ -1,0 +1,28 @@
+<h1>All products</h1>
+
+<div class="row">
+  <div class="col-sm-6">
+    <h3>Add Product to Inventory</h3>
+
+    <form action="/product" method="post">
+      <label for="new_product_name">Product Name</label>
+      <input type="text" name="new_product_name">
+      <label for="new_product_price">Product Price</label>
+      <input type="money" name="new_product_price">
+      <button type="submit" name="button">Add Product</button>
+    </form>
+  </div>
+  <div class="col-sm-6">
+    <h3>INVENTORY</h3>
+    <% if @products.any? %>
+
+    <ul>
+      <% @products.each do |product| %>
+      <li><%= product.name%></li>
+      <% end %>
+    </ul>
+    <% else %>
+    <h4>There are no products yet</h4>
+    <% end %>
+  </div>
+</div>
