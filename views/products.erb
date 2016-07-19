@@ -18,7 +18,10 @@
 
     <ul>
       <% @products.each do |product| %>
-      <li><%= product.name%></li>
+      <li><%= product.name%><form action="/product/<%= product.id()%>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <button type="submit" name="button">Delete</button></li>
+  </form></li>
       <% end %>
     </ul>
     <% else %>

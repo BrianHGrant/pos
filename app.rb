@@ -21,3 +21,9 @@ post('/product') do
   product = Product.create({:name => name, :price => price, :purchase_id => nil, :sold => false})
   redirect('/products')
 end
+
+delete('/product/:id') do
+  product = Product.find(params.fetch('id'))
+  product.delete
+  redirect('/products')
+end
