@@ -4,4 +4,6 @@ class Product < ActiveRecord::Base
   scope(:not_sold, -> do
     where({:sold => false})
   end)
+
+  validates(:name, :presence => true)
 end

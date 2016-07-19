@@ -16,4 +16,9 @@ describe('Product') do
       expect(Product.not_sold()).to(eq([test_product]))
     end
   end
+
+  it "ensures the name key has a value" do
+    test_product = Product.new({:name => '', :price => 19.45, :sold => true, :purchase_id => nil})
+    expect(test_product.save()).to(eq(false))
+  end
 end

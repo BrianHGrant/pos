@@ -27,3 +27,11 @@ delete('/product/:id') do
   product.delete
   redirect('/products')
 end
+
+patch('/product/edit') do
+  product = Product.find(params.fetch("product_update"))
+  name = params.fetch('name_update')
+  price = params.fetch('price_update')
+  product.update({:name => name, :price => price})
+  redirect('/products')
+end

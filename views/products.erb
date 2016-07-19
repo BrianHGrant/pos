@@ -29,3 +29,21 @@
     <% end %>
   </div>
 </div>
+<div class="row">
+  <div class="col-sm-offset-3 col-sm-6">
+    <form action="/product/edit" method="post">
+      <input type="hidden" name="_method" value="patch">
+      <label for="product_update">Select Item to Update</label>
+      <select id="product_update" name="product_update" type="text">
+        <% @products.each() do |product| %>
+          <option value="<%= product.id %>"><%= product.name %></option>
+        <% end %>
+      </select>
+      <label for="name_update">New name:</label>
+      <input type="text" name="name_update">
+      <label for="price_update">New price:</label>
+      <input type="money" name="price_update">
+      <button type="submit">Update Item</button>
+    </form>
+  </div>
+</div>
