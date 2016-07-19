@@ -30,11 +30,39 @@ delete('/product/:id') do
 end
 
 patch('/product/edit') do
-  binding.pry
   @product = Product.find(params.fetch("product_update"))
-  name = params.fetch('name_update')
-  price = params.fetch('price_update')
-  sold = params.fetch("is_sold")
+  name = params.fetch('name_update') == '' ? @product.name : params.fetch('name_update')
+  price = params.fetch('price_update') == '' ? @product.price : params.fetch('price_update')
+  sold = params.fetch("is_sold", false)
   @product.update({:name => name, :price => price, :sold => sold})
   redirect('/products')
+end
+
+get('/transaction') do
+  @products = Product.all()
+  erb(:transaction)
+end
+
+post('/transaction') do
+  ids = []
+  time = Time.now
+  params[:selling].each do |item|
+    ids.push(item.to_i())
+  end
+  @purchase = Purchase.create({:total_cost => nil, :date => time})
+  ids.each do |item|
+    Product.find(item).update({:purchase_id => @purchase.id()})
+  end
+  @products = Product.all()
+  @purchase.total
+  erb(:cart)
+end
+
+patch('/transaction/:id') do
+  purchase = Purchase.find(params.fetch('id').to_i)
+  products = purchase.products()
+  products.each do |product|
+    product.update({:sold => true})
+  end
+  redirect('/')
 end

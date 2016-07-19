@@ -1,0 +1,20 @@
+<h1>Your Cart</h1>
+
+<% if @products.any? %>
+<ul>
+  <% @products.each do |product| %>
+  <% if product.purchase_id == @purchase.id %>
+    <li><%= product.name%>  <%= product.price %></li>
+    <% end %>
+  <% end %>
+</ul>
+<% else %>
+<h4>Your cart is empty</h4>
+<% end %>
+<h4>Total: $<%= @purchase.total_cost %></h4>
+
+<form action="/transaction/<%= @purchase.id %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <button type="submit">Checkout</button>
+</form>
+<a href="/">Return Home</a>

@@ -1,0 +1,21 @@
+<h1>Point of Sale</h1>
+
+<h4>Select items to add to sale</h4>
+
+<% if @products.any? %>
+<form action="/transaction" method="post">
+<ul>
+  <% @products.each do |product| %>
+  <% if product.sold == false %>
+    <li><%= product.name%> <input type="checkbox" name="selling[]" value="<%= product.id %>">
+ </li>
+    <% end %>
+  <% end %>
+</ul>
+<button type="submit" name="button">Move to checkout</button>
+</form>
+<% else %>
+<h4>There are no products yet</h4>
+<% end %>
+
+<a href="/">Return Home</a>
