@@ -8,4 +8,12 @@ describe('Product') do
       expect(test_product.purchase()).to(eq(test_purchase))
     end
   end
+
+  describe('.not_sold') do
+    it('returns the unsold items') do
+      test_product = Product.create({:name => 'China Doll', :price => 19.45, :sold => false, :purchase_id => nil})
+      test_product2 = Product.create({:name => 'Tiffany Lamp', :price => 8000, :sold => true, :purchase_id => nil})
+      expect(Product.not_sold()).to(eq([test_product]))
+    end
+  end
 end
