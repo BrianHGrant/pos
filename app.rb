@@ -45,11 +45,10 @@ end
 
 post('/transaction') do
   ids = []
-  time = Time.now
   params[:selling].each do |item|
     ids.push(item.to_i())
   end
-  @purchase = Purchase.create({:total_cost => nil, :date => time})
+  @purchase = Purchase.create({:total_cost => nil})
   ids.each do |item|
     Product.find(item).update({:purchase_id => @purchase.id()})
   end
@@ -65,4 +64,22 @@ patch('/transaction/:id') do
     product.update({:sold => true})
   end
   redirect('/')
+end
+
+get('/sales') do
+  @purchases = Purchase.all()
+  erb(:sales)
+end
+
+post('/sales') do
+  @result = 0
+  @start = params.fetch('start')
+  @finish = params.fetch('finish')
+  sales = Purchase.where(created_at: @start..@finish.next)
+  sales.each do |purchase|
+    purchase.total()
+    @result += purchase.total_cost
+  end
+  @result
+  erb(:sales)
 end

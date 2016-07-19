@@ -1,0 +1,12 @@
+<h1>Sales</h1>
+
+<p>Select a timeframe to see the sales data</p>
+
+<form action="/sales" method="post">
+  <input type="date" name="start">
+  <input type="date" name="finish">
+  <button type="submit">Crunch the Numbers</button>
+</form>
+
+
+<h2>Total sales for: <%= @start %> thru <%= @finish %> <br>$<%= @result %></h2>
