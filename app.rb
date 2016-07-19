@@ -1,0 +1,7 @@
+require('pg')
+require("sinatra")
+require("sinatra/reloader")
+require("sinatra/activerecord")
+require("./lib/")
+require("./lib/purchase")
+also_reload("lib/**/*.rb")
