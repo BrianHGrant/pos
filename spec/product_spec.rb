@@ -18,7 +18,12 @@ describe('Product') do
   end
 
   it "ensures the name key has a value" do
-    test_product = Product.new({:name => '', :price => 19.45, :sold => true, :purchase_id => nil})
+    test_product = Product.new({:name => '', :price => 19.45, :sold => false, :purchase_id => nil})
+    expect(test_product.save()).to(eq(false))
+  end
+
+  it "ensures the price key has a value" do
+    test_product = Product.new({:name => 'Tiffany Lamp', :price => "", :sold => false, :purchase_id => nil})
     expect(test_product.save()).to(eq(false))
   end
 end

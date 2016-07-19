@@ -18,7 +18,12 @@
 
     <ul>
       <% @products.each do |product| %>
-      <li><%= product.name%><form action="/product/<%= product.id()%>" method="post">
+      <li><%= product.name%>  $<%= product.price%> <%if product.sold%>
+        <p>SOLD</p>
+        <% else %>
+        <p>AVAILABLE</p>
+        <% end %>
+        <form action="/product/<%= product.id()%>" method="post">
     <input type="hidden" name="_method" value="delete">
     <button type="submit" name="button">Delete</button></li>
   </form></li>
@@ -43,6 +48,10 @@
       <input type="text" name="name_update">
       <label for="price_update">New price:</label>
       <input type="money" name="price_update">
+      <label for="is_sold">Available</label>
+      <input type="checkbox" name="is_sold" value="false">
+      <label for="is_sold">Sold</label>
+      <input type="checkbox" name="is_sold" value="true">
       <button type="submit">Update Item</button>
     </form>
   </div>

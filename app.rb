@@ -1,4 +1,5 @@
 require('pg')
+require('pry')
 require("sinatra")
 require("sinatra/reloader")
 require("sinatra/activerecord")
@@ -29,9 +30,11 @@ delete('/product/:id') do
 end
 
 patch('/product/edit') do
-  product = Product.find(params.fetch("product_update"))
+  binding.pry
+  @product = Product.find(params.fetch("product_update"))
   name = params.fetch('name_update')
   price = params.fetch('price_update')
-  product.update({:name => name, :price => price})
+  sold = params.fetch("is_sold")
+  @product.update({:name => name, :price => price, :sold => sold})
   redirect('/products')
 end
