@@ -4,6 +4,8 @@ require ('pg')
 require('sinatra/activerecord')
 require('product')
 require('purchase')
+require('pry')
+require('money')
 
 RSpec.configure do |config|
   config.after(:each) do

@@ -1,5 +1,6 @@
 require('pg')
 require('pry')
+require('money')
 require("sinatra")
 require("sinatra/reloader")
 require("sinatra/activerecord")

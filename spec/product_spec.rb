@@ -26,4 +26,9 @@ describe('Product') do
     test_product = Product.new({:name => 'Tiffany Lamp', :price => "", :sold => false, :purchase_id => nil})
     expect(test_product.save()).to(eq(false))
   end
+
+  it "formats price to dollars and cents" do
+    test_product = Product.create({:name => 'Tiffany Lamp', :price => "45.5", :sold => false, :purchase_id => nil})
+    expect(test_product.price()).to(eq(45.50))
+  end
 end
